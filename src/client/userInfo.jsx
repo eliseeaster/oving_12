@@ -1,29 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import './index.jsx';
+import React, { useEffect, useState } from "react";
+import "./index.jsx";
 
-function UserInfo(){
+function UserInfo() {
+  const [users, setUsers] = useState([]);
 
-    const [users, setUsers] = useState([]);
-
-    async function loadJson() {
-
-        const res = await fetch("/api/users");
-        if (!res.ok) {
-            throw new Error("Something went wrong")
-        }
-        const json = await res.json();
-        setUsers(json)
-
+  async function fetchJson(url) {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch}`);
     }
-    useEffect(loadJson, []);
+    const json = await res.json();
+    setUsers(json);
+  }
 
-    return(
-        <div>
-            {users.map(user => (
-                <h2>{user.name}</h2>
-            ))}
-        </div>
-    )
+  useEffect(async () => {
+    await fetchJson("/api/users");
+  }, []);
+
+  return (
+    <div>
+      {users.map((user) => (
+        <>
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+          <p>{user.age}</p>
+        </>
+      ))}
+    </div>
+  );
 }
 
 export default UserInfo;

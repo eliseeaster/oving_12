@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run parcel\"",
-    "server": "nodemon src/server/server.js",
-    "parcel": "parcel src/client/index.html"
+    "start": "concurrently npm:server npm:parcel",
+    "server": "nodemon --watch src/server src/server/server.js",
+    "parcel": "parcel watch src/client/index.html",
+    "test": "jest --coverage",
+    "format": "prettier --write src"
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "ws": "^7.4.5"
   }
 }

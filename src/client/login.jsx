@@ -1,10 +1,8 @@
-import React from 'react';
-import './index.jsx';
+import React, { useState } from "react";
+import "./index.jsx";
 
-function Login(){
-    return(
-        <p>Log in here</p>
-    )
+function Login({ onLogin }) {
+  return <p>Login</p>;
 }
 
 export default Login;
