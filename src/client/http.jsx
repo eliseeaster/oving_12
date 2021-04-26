@@ -1,5 +1,5 @@
-export async function fetchJSON(url) {
-  const res = await fetch(url);
+export async function fetchJSON(url, options) {
+  const res = await fetch(url, options);
   if (!res.ok) {
     throw new Error(
       `Something went wrong loading ${res.url}: ${res.statusText}`

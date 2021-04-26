@@ -1,37 +1,11 @@
 const express = require("express");
 const path = require("path");
-const ws = require("ws");
 const userApi = require("./userApi");
 const bodyParser = require("body-parser");
+const wsServer = require("./websocket");
+const fetch = require("node-fetch");
 
 const app = express();
-
-const wsServer = new ws.Server({ noServer: true });
-// Keep a list of all incomings connections
-const sockets = [];
-let messageIndex = 0;
-
-wsServer.on("connection", (socket) => {
-  // Add this connection to the list of connections
-  sockets.push(socket);
-
-  let socketUsername;
-  socket.on("message", (msg) => {
-    const wsMessage = JSON.parse(msg);
-    const { type } = wsMessage;
-    if (type === "message") {
-      const { message } = wsMessage;
-      const username = socketUsername;
-      const id = messageIndex++;
-      for (const recipient of sockets) {
-        recipient.send(JSON.stringify({ message, id, username }));
-      }
-    } else if (type === "login") {
-      const { username } = wsMessage;
-      socketUsername = username;
-    }
-  });
-});
 
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
@@ -44,6 +18,37 @@ app.use((req, res, next) => {
   res.sendFile(path.resolve(__dirname, "..", "..", "dist", "index.html"));
 });
 
+const discoveryURL =
+  "https://accounts.google.com/.well-known/openid-configuration";
+
+async function fetchJson(url, options) {
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+  }
+  return await res.json();
+}
+
+app.use(async (req, res, next) => {
+  const Authorization = req.header("Authorization");
+  if (Authorization) {
+    const { userinfo_endpoint } = await fetchJson(discoveryURL);
+    req.userinfo = await fetchJson(userinfo_endpoint, {
+      headers: {
+        Authorization,
+      },
+    });
+  }
+  next();
+});
+
+app.get("/api/login-info", async (req, res) => {
+  if (!req.userinfo) {
+    return res.send(401);
+  }
+  return res.json(req.userinfo);
+});
+
 const server = app.listen(3000, () => {
   console.log("started on port http://localhost:3000");
   server.on("upgrade", (req, socket, head) => {
@@ -53,5 +58,3 @@ const server = app.listen(3000, () => {
     });
   });
 });
-
-module.exports = wsServer;
