@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
-import "./index.jsx";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useLoading } from "./useLoading";
+import { ErrorView } from "./errorView";
 
-function UserInfo() {
-  const [users, setUsers] = useState([]);
+export function UserInfo({ userApi }) {
+  const { data: users, error, loading, reload } = useLoading(
+    async () => await userApi.listUsers()
+  );
 
-  async function fetchJson(url) {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch}`);
-    }
-    const json = await res.json();
-    setUsers(json);
+  if (error) {
+    return <ErrorView error={error} reload={reload} />;
   }
 
-  useEffect(async () => {
-    await fetchJson("/api/users");
-  }, []);
+  if (loading || !users) {
+    return <h1>Loading</h1>;
+  }
 
   return (
-    <div>
-      {users.map((user) => (
-        <>
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
-          <p>{user.age}</p>
-        </>
+    <>
+      {users.map(({ id, name, lastName, email }) => (
+        <li key={id}>
+          <Link
+            to={`/users/${id}/edit`}
+          >{`Name: ${name} LastName: ${lastName} Email: ${email}`}</Link>
+        </li>
       ))}
-    </div>
+    </>
   );
 }
-
-export default UserInfo;

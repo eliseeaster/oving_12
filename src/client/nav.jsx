@@ -9,16 +9,16 @@ function Nav() {
         <Link to="/">
           <li>Welcome</li>
         </Link>
-        <Link to="/userInfo">
+        <Link to={"/users"}>
           <li>User info</li>
         </Link>
-        <Link to="/login">
+        <Link to={"/login"}>
           <li>Login</li>
         </Link>
-        <Link to="chat">
+        <Link to={"/chat"}>
           <li>Chat</li>
         </Link>
-        <Link to="/createUser">
+        <Link to={"/createUser"}>
           <li>Create user</li>
         </Link>
       </ul>

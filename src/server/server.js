@@ -1,32 +1,15 @@
 const express = require("express");
 const path = require("path");
-const app = express();
 const ws = require("ws");
+const userApi = require("./userApi");
+const bodyParser = require("body-parser");
+
+const app = express();
 
 const wsServer = new ws.Server({ noServer: true });
 // Keep a list of all incomings connections
 const sockets = [];
 let messageIndex = 0;
-const users = [
-  {
-    id: "1",
-    name: "Elise",
-    email: "elise@gmail.com",
-    age: "23",
-  },
-  {
-    id: "2",
-    name: "Tina",
-    email: "tina@gmail.com",
-    age: "23",
-  },
-  {
-    id: "1",
-    name: "Fanny",
-    email: "Fanny@gmail.com",
-    age: "22",
-  },
-];
 
 wsServer.on("connection", (socket) => {
   // Add this connection to the list of connections
@@ -50,22 +33,19 @@ wsServer.on("connection", (socket) => {
   });
 });
 
-app.get("/api/users", (req, res) => {
-  res.json(users);
-});
-
+app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
+app.use("/api/users", userApi);
 
 app.use((req, res, next) => {
-  if (req.method === "GET" && !req.path.startsWith("/api")) {
-    return res.sendFile(
-      path.resolve(__dirname, "..", "..", "dist", "index.html")
-    );
+  if (req.method !== "GET" || req.path.startsWith("/api")) {
+    return next();
   }
-  return next();
+  res.sendFile(path.resolve(__dirname, "..", "..", "dist", "index.html"));
 });
 
 const server = app.listen(3000, () => {
+  console.log("started on port http://localhost:3000");
   server.on("upgrade", (req, socket, head) => {
     wsServer.handleUpgrade(req, socket, head, (socket) => {
       // This will pass control to `wsServer.on("connection")`

@@ -3,32 +3,59 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./nav";
 import Welcome from "./welcome";
-import UserInfo from "./userInfo";
-import ChatPage from "./chat";
+import { ChatPage } from "./chat";
 import Login from "./login";
 import { CreateUser } from "./createUser";
 import { fetchJSON, postJSON } from "./http";
+import { EditUser } from "./EditUser";
+import { UserInfo } from "./userInfo";
+import { Link } from "react-router-dom";
 
 function App() {
-  const bookApi = {
-    createUser: async ({ name, email, age }) => {
+  const userApi = {
+    listUsers: async () => await fetchJSON("/api/users"),
+    getUser: async (id) => await fetchJSON(`/api/users/${id}`),
+    createUser: async ({ name, lastName, email }) => {
       return postJSON("/api/users", {
         method: "POST",
-        json: { name, email, age },
+        json: { name, lastName, email },
       });
     },
+    updateUser: async (id, { name, lastName, email }) =>
+      postJSON(`/api/users/${id}`, {
+        method: "PUT",
+        json: { name, lastName, email },
+      }),
   };
 
   return (
     <>
       <Router>
-        <Nav />
+        <header>
+          <Link to="/">Tilbake</Link>
+        </header>
         <Switch>
-          <Route path="/" exact component={Welcome} />
-          <Route path="/login" component={Login} />
-          <Route path="/userInfo" component={UserInfo} />
-          <Route path="/chat" component={ChatPage} />
-          <Route path="/createUser" component={CreateUser} />
+          <Route exact path="/users">
+            <UserInfo userApi={userApi} />
+          </Route>
+          <Route path="/create">
+            <CreateUser userApi={userApi} />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/">
+            <Welcome />
+          </Route>
+          <Route path="/chat">
+            <ChatPage></ChatPage>
+          </Route>
+          <Route path="/users/:id/edit">
+            <EditUser userApi={userApi} />
+          </Route>
+          <Route>
+            <h1>Not found</h1>
+          </Route>
         </Switch>
       </Router>
     </>
