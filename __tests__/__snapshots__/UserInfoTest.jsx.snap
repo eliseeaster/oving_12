@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`user list page show users on dom 1`] = `"<p>Click on the user to change info</p><li><a href=\\"/users/1/edit\\">Name: Elise  Last Name: Halvorsen Email: elise@mail</a></li>"`;

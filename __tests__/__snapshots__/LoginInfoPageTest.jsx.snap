@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`profile page test can show error message 1`] = `"<h1>Loading...</h1>"`;
-
-exports[`profile page test can show information about logged in user 1`] = `"<div><h1>Your profile</h1><div>Name: Elise</div><div>Email: </div></div>"`;
-
-exports[`profile page test shows loading  1`] = `"<h1>Loading...</h1>"`;
