@@ -1,5 +1,4 @@
 {
-  "name": "oving_12",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -9,16 +8,8 @@
     "test": "jest --coverage",
     "format": "prettier --write src"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eliseeaster/oving_12.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/eliseeaster/oving_12/issues"
-  },
-  "homepage": "https://github.com/eliseeaster/oving_12#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
