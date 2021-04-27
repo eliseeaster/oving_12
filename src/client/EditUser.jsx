@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { InputField } from "./inputField";
-import { useLoading } from "./useLoading";
-import { ErrorView } from "./errorView";
-import { LoadingView } from "./loadingView";
+import { InputField } from "./InputField";
+import { useLoading } from "./UseLoading";
+import { ErrorView } from "./ErrorView";
+import { LoadingView } from "./LoadingView";
 
 function EditUserForm({ user, onSubmit }) {
   const [name, setName] = useState(user.name);

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
-import { UserInfo } from "./userInfo";
-import { CreateUser } from "./createUser";
-import Login from "./login";
-import { ChatPage } from "./chat";
+import { UserInfo } from "./UserInfo";
+import { CreateUser } from "./CreateUser";
+import Login from "./Login";
+import { ChatPage } from "./Chat";
 import { EditUser } from "./EditUser";
 import { fetchJSON, postJSON } from "./http";
 import { LoginCallBackPage } from "./LoginCallBackPage";
 import { LoginInfoPage } from "./LoginInfoPage";
-import { Messages } from "./messages";
+import { Messages } from "./Messages";
 
 export function Application() {
   const userApi = {

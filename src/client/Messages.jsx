@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLoading } from "./useLoading";
-import { ErrorView } from "./errorView";
-import { LoadingView } from "./loadingView";
+import { useLoading } from "./UseLoading";
+import { ErrorView } from "./ErrorView";
+import { LoadingView } from "./LoadingView";
 
 export function Messages({ messageApi }) {
   const { data: messages, error, loading, reload } = useLoading(

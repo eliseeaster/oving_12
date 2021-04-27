@@ -1,37 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./index.jsx";
 
-export function ChatPage({ messageApi }) {
-  const [username, setUsername] = useState();
-  if (!username) {
-    return <ChatLogin onLogin={(username) => setUsername(username)} />;
-  }
-  return <ChatView username={username} messageApi={messageApi} />;
-}
-
-function ChatLogin({ onLogin }) {
-  const [username, setUsername] = useState("");
-  function handleSubmit(e) {
-    e.preventDefault();
-    onLogin(username);
-    console.log("username" + username);
-  }
-  return (
-    <div>
-      <h1>Please log in</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button>Login</button>
-      </form>
-    </div>
-  );
-}
-
-export function ChatView({ username, messageApi }) {
+export function ChatView({ chatPreview, username, messageApi }) {
   const [chatLog, setChatlog] = useState([]);
   const [message, setMessage] = useState("");
   const [ws, setWs] = useState();
@@ -55,34 +24,36 @@ export function ChatView({ username, messageApi }) {
 
   function handleSubmitMessage(e) {
     e.preventDefault();
-    ws.send(
-      JSON.stringify({
-        type: "message",
-        message: message,
-      })
-    );
+    if (ws.readyState !== 0)
+      ws.send(
+        JSON.stringify({
+          type: "message",
+          message: message,
+        })
+      );
     setMessage("");
     console.log("message: " + message);
   }
 
   async function submit(e) {
     e.preventDefault();
-    console.log("name " + username + "message " + message);
-    console.log("api " + messageApi);
     await messageApi.createMessage({ username, message });
   }
 
+  const chatOutput = chatLog.length ? chatLog : chatPreview;
   return (
-    <>
-      <h1>Chat page</h1>
-      <div>
-        {chatLog.map(({ message, id, username }) => (
-          <div keys={id}>
+    <div id="chatContainer">
+      <header>
+        <h1>Chat page</h1>
+      </header>
+      <main id="chatLog">
+        {chatOutput?.map(({ message, id, username }) => (
+          <div className="message" keys={id}>
             <strong>{username}</strong>
             {message}
           </div>
         ))}
-      </div>
+      </main>
       <div>
         <form onSubmit={handleSubmitMessage}>
           <input
@@ -95,7 +66,6 @@ export function ChatView({ username, messageApi }) {
           <button onClick={submit}>Save</button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
-export default ChatPage;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLoading } from "./useLoading";
-import { ErrorView } from "./errorView";
+import { useLoading } from "./UseLoading";
+import { ErrorView } from "./ErrorView";
 
 export function UserInfo({ userApi }) {
   const { data: users, error, loading, reload } = useLoading(
