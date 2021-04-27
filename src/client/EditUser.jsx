@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { InputField } from "./inputField";
 import { useLoading } from "./useLoading";
 import { ErrorView } from "./errorView";
+import { LoadingView } from "./loadingView";
 
 function EditUserForm({ user, onSubmit }) {
   const [name, setName] = useState(user.name);
@@ -10,6 +11,7 @@ function EditUserForm({ user, onSubmit }) {
   const [email, setEmail] = useState(user.email);
 
   async function submit(e) {
+    e.preventDefault();
     onSubmit(e, { name, lastName, email });
   }
 
@@ -30,6 +32,7 @@ function EditUserForm({ user, onSubmit }) {
 
 export function EditUser({ userApi }) {
   const { id } = useParams();
+  const history = useHistory;
 
   const { data: user, loading, error, reload } = useLoading(
     async () => await userApi.getUser(id),
@@ -39,6 +42,7 @@ export function EditUser({ userApi }) {
   async function handleSubmit(e, { name, lastName, email }) {
     e.preventDefault();
     await userApi.updateUser(id, { name, lastName, email });
+    history.push("/");
   }
 
   if (error) {
@@ -46,7 +50,7 @@ export function EditUser({ userApi }) {
   }
 
   if (loading || !user) {
-    return <p>Loading..</p>;
+    return <LoadingView />;
   }
 
   return <EditUserForm user={user} onSubmit={handleSubmit} />;

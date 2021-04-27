@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`message list page show messages on dom 1`] = `"<div><h3>To user:1</h3><p>User: Elise Message:Hei</p></div>"`;

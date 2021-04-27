@@ -26,11 +26,11 @@ describe("edit user page", () => {
     );
   });
 
-  xit("can show loading screen", async () => {
+  it("can show loading screen", async () => {
     const getUser = () => new Promise((resolve) => {});
     const container = await renderForTest(<EditUser userApi={{ getUser }} />);
     expect(container.innerHTML).toMatchSnapshot();
-    expect(container.querySelector("h1").textContent).toEqual("Loading ...");
+    expect(container.querySelector("h1").textContent).toEqual("Loading...");
   });
 
   it("can show error message", async () => {

@@ -1,28 +1,25 @@
 import React from "react";
 import { useLoading } from "./useLoading";
+import { LoadingView } from "./loadingView";
+import { ErrorView } from "./errorView";
 
-export function LoginInfoPage({ loadProfile }) {
-  const { loading, error, data } = useLoading(async () => await loadProfile());
+export function LoginInfoPage({ userApi }) {
+  const { loading, error, data, reload } = useLoading(
+    async () => await userApi.loadProfile()
+  );
 
-  console.log(loadProfile);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (loading || !data) {
+    return <LoadingView />;
   }
   if (error) {
-    return (
-      <div>
-        <h1>An error occurred</h1>
-        <div>{error.toString()}</div>
-      </div>
-    );
+    return <ErrorView error={error} reload={reload} />;
   }
 
   return (
     <div>
       <h1>Profile</h1>
-      <div>{data.name}</div>
-      <div>{data.email}</div>
+      <div>Name: {data.name}</div>
+      <div>Message: {data.email}</div>
     </div>
   );
 }

@@ -34,9 +34,11 @@ export function Login({ identityProvider }) {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <button onClick={handleLogin}>Login</button>
+    <div className="loginDiv">
+      <h1 className="loginTxt">Login</h1>
+      <button className="loginBtn" onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 }

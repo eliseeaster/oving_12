@@ -1,0 +1,26 @@
+
+body{
+    margin: 0;
+    background: pink;
+}
+
+.navContainer{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-auto-rows: auto;
+}
+
+.loginDiv{
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-rows: auto auto;
+    width: 200px;
+}
+
+.loginTxt{
+
+}
+.loginBtn{
+    width: 100px;
+
+}

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { InputField } from "./inputField";
+import { useHistory } from "react-router";
 
 export function CreateUser({ userApi }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+
+  const history = useHistory();
 
   async function submit(e) {
     e.preventDefault();

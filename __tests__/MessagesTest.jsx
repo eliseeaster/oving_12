@@ -2,30 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter } from "react-router";
-import { UserInfo } from "../src/client/userInfo";
+import { Messages } from "../src/client/messages";
 
-const userApi = {
-  listUsers: async () => [
-    { id: 1, name: "Elise", lastName: "Halvorsen", email: "elise@mail" },
-  ],
+const messageApi = {
+  listMessages: async () => [{ id: 1, username: "Elise", message: "Hei" }],
 };
 
-describe("user list page", () => {
-  it("show users on dom", async () => {
+describe("message list page", () => {
+  it("show messages on dom", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
     await act(async () => {
       ReactDOM.render(
         <MemoryRouter>
-          <UserInfo userApi={userApi} />
+          <Messages messageApi={messageApi} />
         </MemoryRouter>,
         container
       );
     });
 
     expect(container.innerHTML).toMatchSnapshot();
-    expect(container.querySelector("li").textContent).toEqual(
-      "Name: Elise " + "LastName: Halvorsen " + "Email: elise@mail"
+    expect(container.querySelector("p").textContent).toEqual(
+      "User: Elise " + "Message:Hei"
     );
   });
 });

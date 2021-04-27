@@ -4,12 +4,14 @@ const userApi = require("./userApi");
 const bodyParser = require("body-parser");
 const wsServer = require("./websocket");
 const fetch = require("node-fetch");
+const messageApi = require("./messageApi");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 app.use("/api/users", userApi);
+app.use("/api/messages", messageApi);
 
 app.use((req, res, next) => {
   if (req.method !== "GET" || req.path.startsWith("/api")) {

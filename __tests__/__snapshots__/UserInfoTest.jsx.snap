@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`user list page show users on dom 1`] = `"<li><a href=\\"/users/1/edit\\">Name: Elise Email: elise@mail Age: 23</a></li>"`;
+exports[`user list page show users on dom 1`] = `"<li><a href=\\"/users/1/edit\\">Name: Elise LastName: Halvorsen Email: elise@mail</a></li>"`;

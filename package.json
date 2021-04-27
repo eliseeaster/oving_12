@@ -30,6 +30,7 @@
     "supertest": "^6.1.3"
   },
   "dependencies": {
+    "@jest/globals": "^26.6.2",
     "body-parser": "^1.19.0",
     "concurrently": "^6.0.2",
     "cookie-parser": "^1.4.5",
@@ -42,6 +43,27 @@
     "ws": "^7.4.5"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*{js,jsx,ts,tsx}",
+      "!<root>/src/client/http.jsx",
+      "!<root>/src/client/chat.jsx",
+      "!<root>/src/client/createUser.jsx",
+      "!<root>/src/client/EditUser.jsx",
+      "!<root>/src/client/errorView.jsx",
+      "!<root>/src/client/index.jsx",
+      "!<root>/src/client/inputField.jsx",
+      "!<root>/src/client/login.jsx",
+      "!<root>/src/client/LoginCallBackPage.jsx",
+      "!<root>/src/client/LoginInfoPage.jsx",
+      "!<root>/src/client/messages.jsx",
+      "!<root>/src/client/nav.jsx",
+      "!<root>/src/client/useLoading.jsx",
+      "!<root>/src/client/userInfo.jsx",
+      "!<root>/src/server/messageApi.js",
+      "!<root>/src/server/server.js",
+      "!<root>/src/server/userApi.js",
+      "!<root>/src/server/websocket.js"
+    ],
     "transform": {
       "\\.jsx": "babel-jest"
     }

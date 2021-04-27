@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./index.jsx";
 
-export function ChatPage() {
+export function ChatPage({ messageApi }) {
   const [username, setUsername] = useState();
   if (!username) {
     return <ChatLogin onLogin={(username) => setUsername(username)} />;
   }
-  return <ChatView username={username} />;
+  return <ChatView username={username} messageApi={messageApi} />;
 }
 
 function ChatLogin({ onLogin }) {
@@ -14,6 +14,7 @@ function ChatLogin({ onLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     onLogin(username);
+    console.log("username" + username);
   }
   return (
     <div>
@@ -30,7 +31,7 @@ function ChatLogin({ onLogin }) {
   );
 }
 
-export function ChatView({ username }) {
+export function ChatView({ username, messageApi }) {
   const [chatLog, setChatlog] = useState([]);
   const [message, setMessage] = useState("");
   const [ws, setWs] = useState();
@@ -61,6 +62,14 @@ export function ChatView({ username }) {
       })
     );
     setMessage("");
+    console.log("message: " + message);
+  }
+
+  async function submit(e) {
+    e.preventDefault();
+    console.log("name " + username + "message " + message);
+    console.log("api " + messageApi);
+    await messageApi.createMessage({ username, message });
   }
 
   return (
@@ -83,6 +92,7 @@ export function ChatView({ username }) {
             onChange={(e) => setMessage(e.target.value)}
           />
           <button>Send</button>
+          <button onClick={submit}>Save</button>
         </form>
       </div>
     </>

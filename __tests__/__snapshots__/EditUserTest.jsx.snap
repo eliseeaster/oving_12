@@ -4,4 +4,4 @@ exports[`edit user page can show error message 1`] = `"<div>Something went wrong
 
 exports[`edit user page can show information about an existing user 1`] = `"<form><h1>Edit an existing user (Tina)</h1><div><label>Name: <input type=\\"text\\" value=\\"Tina\\"></label></div><div><label>Last name: <input type=\\"text\\" value=\\"Halvorsen\\"></label></div><div><label>Email: <input type=\\"text\\" value=\\"tina@mail\\"></label></div><button>Submit</button></form>"`;
 
-exports[`edit user page can show loading screen 1`] = `"<p>Loading..</p>"`;
+exports[`edit user page can show loading screen 1`] = `"<h1>Loading...</h1>"`;

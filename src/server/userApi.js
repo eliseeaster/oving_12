@@ -6,19 +6,19 @@ const users = [
     id: 1,
     name: "Elise",
     lastName: "Andersen",
-    email: "23",
+    email: "elise@mail",
   },
   {
     id: 2,
     name: "Tina",
     lastName: "Kristensen",
-    age: "22",
+    email: "tina@mail",
   },
   {
     id: 3,
     name: "Fanny",
     lastName: "Haraldsen",
-    age: "22",
+    email: "fanny@mail",
   },
 ];
 
