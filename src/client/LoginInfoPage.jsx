@@ -1,7 +1,7 @@
 import React from "react";
-import { useLoading } from "./UseLoading";
-import { LoadingView } from "./LoadingView";
-import { ErrorView } from "./ErrorView";
+import { useLoading } from "./lib/useLoading";
+import { LoadingView } from "./components/LoadingView";
+import { ErrorView } from "./components/ErrorView";
 
 export function LoginInfoPage({ userApi }) {
   const { loading, error, data, reload } = useLoading(
@@ -17,9 +17,9 @@ export function LoginInfoPage({ userApi }) {
 
   return (
     <div>
-      <h1>Profile</h1>
+      <h1>Your profile</h1>
       <div>Name: {data.name}</div>
-      <div>Message: {data.email}</div>
+      <div>Email: {data.email}</div>
     </div>
   );
 }

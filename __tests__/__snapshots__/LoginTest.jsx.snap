@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login page display login page 1`] = `"<div class=\\"loginDiv\\"><h1 class=\\"loginTxt\\">Login</h1><button class=\\"loginBtn\\">Login</button></div>"`;

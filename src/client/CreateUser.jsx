@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputField } from "./inputField";
+import { InputField } from "./components/InputField";
 import { useHistory } from "react-router";
 
 export function CreateUser({ userApi }) {

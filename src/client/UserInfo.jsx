@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLoading } from "./UseLoading";
-import { ErrorView } from "./ErrorView";
+import { useLoading } from "./lib/useLoading";
+import { ErrorView } from "./components/ErrorView";
 
 export function UserInfo({ userApi }) {
   const { data: users, error, loading, reload } = useLoading(
@@ -18,11 +18,12 @@ export function UserInfo({ userApi }) {
 
   return (
     <>
+      <p>Click on the user to change info</p>
       {users.map(({ id, name, lastName, email }) => (
         <li key={id}>
           <Link
             to={`/users/${id}/edit`}
-          >{`Name: ${name} LastName: ${lastName} Email: ${email}`}</Link>
+          >{`Name: ${name}  Last Name: ${lastName} Email: ${email}`}</Link>
         </li>
       ))}
     </>

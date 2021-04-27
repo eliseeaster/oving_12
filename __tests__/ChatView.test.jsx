@@ -14,17 +14,17 @@ async function renderForTest(child) {
 }
 
 describe("chat view page", () => {
-  it("can show existing chat messages", async () => {
+  it("show existing chat messages", async () => {
     const chatLog = [
       {
         id: "1",
-        username: "Johannes",
+        username: "Hanne",
         message: "Hello",
       },
       {
         id: "2",
         username: "User 2",
-        message: "Welcome, Johannes",
+        message: "Welcome, Hanne",
       },
     ];
 
@@ -33,7 +33,7 @@ describe("chat view page", () => {
     );
 
     expect(container.querySelector(".message").textContent).toEqual(
-      "JohannesHello"
+      "HanneHello"
     );
     expect(container.querySelector("header h1").textContent).toEqual(
       "Chat page"

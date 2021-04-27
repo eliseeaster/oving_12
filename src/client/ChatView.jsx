@@ -62,8 +62,8 @@ export function ChatView({ chatPreview, username, messageApi }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+          <button onClick={submit}>Click here first to save message</button>
           <button>Send</button>
-          <button onClick={submit}>Save</button>
         </form>
       </div>
     </div>

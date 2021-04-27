@@ -23,7 +23,7 @@ describe("profile page test", () => {
     );
     expect(container.innerHTML).toMatchSnapshot();
     expect(container.querySelector("div").textContent).toEqual(
-      "ProfileName: EliseMessage: "
+      "Your profileName: EliseEmail: "
     );
   });
 
@@ -36,7 +36,7 @@ describe("profile page test", () => {
     expect(container.querySelector("h1").textContent).toEqual("Loading...");
   });
 
-  xit("can show error message", async () => {
+  xit("show error message", async () => {
     const loadProfile = () => {
       throw new Error("Failed to load");
     };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "./index.jsx";
-import { fetchJSON } from "./Http";
+import { fetchJSON } from "./lib/Http";
 
 export function randomString(length) {
   const possible =

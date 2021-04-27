@@ -1,13 +1,31 @@
 
 body{
     margin: 0;
-    background: pink;
+    background: #DAFBFF;
 }
 
-.navContainer{
+.navContainer {
     display: grid;
+    padding-top: 100px;
+    padding-left: 90px;
     grid-template-columns: auto auto auto auto auto;
     grid-auto-rows: auto;
+}
+
+a{
+    font-size: xx-large;
+    color: #a866e2;
+    text-decoration: none;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+.welcomeTxt{
+    padding-left: 550px;
+    padding-top: 50px;
+    font-size: 50px;
 }
 
 .loginDiv{
@@ -18,9 +36,14 @@ body{
 }
 
 .loginTxt{
+    margin-top: 100px;
+    margin-left: 180px;
 
 }
 .loginBtn{
     width: 100px;
+    margin-left:100px ;
+    width: 250px;
+    height: 50px;
 
 }

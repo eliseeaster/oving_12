@@ -5,7 +5,7 @@ import { CreateUser } from "./CreateUser";
 import Login from "./Login";
 import { ChatPage } from "./Chat";
 import { EditUser } from "./EditUser";
-import { fetchJSON, postJSON } from "./http";
+import { fetchJSON, postJSON } from "./lib/http";
 import { LoginCallBackPage } from "./LoginCallBackPage";
 import { LoginInfoPage } from "./LoginInfoPage";
 import { Messages } from "./Messages";
@@ -90,6 +90,9 @@ export function Application() {
           </Route>
 
           <Route path="/messages">
+            <nav>
+              <Link to={"/home"}>Back</Link>
+            </nav>
             {!access_token ? (
               <Redirect to={"/"} />
             ) : (
@@ -127,7 +130,7 @@ export function Application() {
           </Route>
 
           <Route exact path="/home">
-            <h1>Welcome</h1>
+            <h1 className={"welcomeTxt"}>Welcome</h1>
             <div className="navContainer">
               <div>
                 <Link to="/users">See users</Link>
@@ -145,7 +148,7 @@ export function Application() {
               </div>
 
               <div>
-                <Link to="/create">Create</Link>
+                <Link to="/create">Create user</Link>
               </div>
             </div>
           </Route>

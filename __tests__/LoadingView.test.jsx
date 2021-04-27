@@ -1,10 +1,10 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
-import { LoadingView } from "../src/client/loadingView";
+import { LoadingView } from "../src/client/components/LoadingView";
 
 describe("loading view", () => {
-  it("shows loading view on dom", () => {
+  it("shows loading view", () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
     act(() => {

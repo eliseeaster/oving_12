@@ -25,7 +25,7 @@ describe("user list page", () => {
 
     expect(container.innerHTML).toMatchSnapshot();
     expect(container.querySelector("li").textContent).toEqual(
-      "Name: Elise " + "LastName: Halvorsen " + "Email: elise@mail"
+      "Name: Elise  Last Name: Halvorsen Email: elise@mail"
     );
   });
 });

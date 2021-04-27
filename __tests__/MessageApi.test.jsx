@@ -6,7 +6,7 @@ const app = express();
 app.use(require("body-parser").json());
 app.use(require("../src/server/messageApi"));
 
-describe("user API", () => {
+describe("message API", () => {
   it("can return the predefined messages", async () => {
     await request(app)
       .get("")
